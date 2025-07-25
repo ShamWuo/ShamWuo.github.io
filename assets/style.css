@@ -1,12 +1,13 @@
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: #fff;
+    background: #fff;
+    color: #111;
+    transition: background 0.3s, color 0.3s;
 }
 header {
-    background: rgba(30, 60, 114, 0.95);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    background: #fff;
+    border-bottom: 1px solid #eee;
     position: relative;
 }
 nav {
@@ -20,6 +21,7 @@ nav {
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 2px;
+    color: #111;
 }
 nav ul {
     list-style: none;
@@ -28,49 +30,69 @@ nav ul {
     margin: 0;
 }
 nav a {
-    color: #fff;
+    color: #111;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s;
+    position: relative;
+}
+nav a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #111;
+    transition: width 0.2s;
+    position: absolute;
+    left: 0;
+    bottom: -4px;
 }
 nav a:hover {
-    color: #ffd700;
+    color: #000;
+}
+nav a:hover::after {
+    width: 100%;
 }
 .hero {
     text-align: center;
     padding: 6rem 2rem 4rem 2rem;
+    background: #fff;
 }
 .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
     font-family: 'Montserrat', sans-serif;
+    color: #111;
 }
 .hero p {
     font-size: 1.5rem;
     margin-bottom: 2rem;
+    color: #444;
 }
 .cta {
-    background: #ffd700;
-    color: #1e3c72;
+    background: #111;
+    color: #fff;
     padding: 0.75rem 2rem;
-    border-radius: 30px;
+    border-radius: 0;
     font-weight: bold;
     text-decoration: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: none;
+    border: 2px solid #111;
     transition: background 0.2s, color 0.2s;
 }
 .cta:hover {
     background: #fff;
-    color: #2a5298;
+    color: #111;
 }
 main {
     max-width: 900px;
     margin: 0 auto;
     padding: 2rem;
-    background: rgba(30, 60, 114, 0.85);
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    background: #fff;
+    border-radius: 0;
+    box-shadow: none;
     margin-top: -3rem;
+    border: 1px solid #eee;
 }
 section {
     margin-bottom: 3rem;
@@ -79,7 +101,9 @@ section h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
     font-family: 'Montserrat', sans-serif;
-    color: #ffd700;
+    color: #111;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
 }
 .skills-list {
     display: flex;
@@ -87,13 +111,14 @@ section h2 {
     gap: 1rem;
 }
 .skill {
-    background: #fff;
-    color: #2a5298;
+    background: #111;
+    color: #fff;
     padding: 0.5rem 1.5rem;
-    border-radius: 20px;
+    border-radius: 0;
     font-weight: 500;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    box-shadow: none;
     margin-bottom: 0.5rem;
+    letter-spacing: 1px;
 }
 .projects-list {
     display: grid;
@@ -102,15 +127,18 @@ section h2 {
 }
 .project {
     background: #fff;
-    color: #2a5298;
+    color: #111;
     padding: 1.5rem;
-    border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    border-radius: 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 .project:hover {
     transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+    background: #111;
+    color: #fff;
 }
 #contact-form {
     display: flex;
@@ -120,37 +148,38 @@ section h2 {
 }
 #contact-form input, #contact-form textarea {
     padding: 0.75rem;
-    border-radius: 8px;
-    border: none;
+    border-radius: 0;
+    border: 1px solid #eee;
     font-size: 1rem;
-    background: #f5f5f5;
-    color: #2a5298;
+    background: #fff;
+    color: #111;
 }
 #contact-form button {
-    background: #ffd700;
-    color: #1e3c72;
+    background: #111;
+    color: #fff;
     padding: 0.75rem 2rem;
-    border-radius: 30px;
+    border-radius: 0;
     font-weight: bold;
-    border: none;
+    border: 2px solid #111;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
 }
 #contact-form button:hover {
     background: #fff;
-    color: #2a5298;
+    color: #111;
 }
 #form-message {
     margin-top: 1rem;
     font-weight: 500;
-    color: #ffd700;
+    color: #111;
 }
 footer {
     text-align: center;
     padding: 2rem 0 1rem 0;
     font-size: 1rem;
-    color: #fff;
+    color: #111;
     background: none;
+    border-top: 1px solid #eee;
 }
 @media (max-width: 700px) {
     nav {
