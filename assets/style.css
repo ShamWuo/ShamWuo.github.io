@@ -1,0 +1,170 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
+}
+header {
+    background: rgba(30, 60, 114, 0.95);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    position: relative;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+}
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+nav a:hover {
+    color: #ffd700;
+}
+.hero {
+    text-align: center;
+    padding: 6rem 2rem 4rem 2rem;
+}
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+.cta {
+    background: #ffd700;
+    color: #1e3c72;
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: background 0.2s, color 0.2s;
+}
+.cta:hover {
+    background: #fff;
+    color: #2a5298;
+}
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: rgba(30, 60, 114, 0.85);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    margin-top: -3rem;
+}
+section {
+    margin-bottom: 3rem;
+}
+section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffd700;
+}
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.skill {
+    background: #fff;
+    color: #2a5298;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    margin-bottom: 0.5rem;
+}
+.projects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+.project {
+    background: #fff;
+    color: #2a5298;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.project:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+#contact-form input, #contact-form textarea {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    background: #f5f5f5;
+    color: #2a5298;
+}
+#contact-form button {
+    background: #ffd700;
+    color: #1e3c72;
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+#contact-form button:hover {
+    background: #fff;
+    color: #2a5298;
+}
+#form-message {
+    margin-top: 1rem;
+    font-weight: 500;
+    color: #ffd700;
+}
+footer {
+    text-align: center;
+    padding: 2rem 0 1rem 0;
+    font-size: 1rem;
+    color: #fff;
+    background: none;
+}
+@media (max-width: 700px) {
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    main {
+        padding: 1rem;
+    }
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .projects-list {
+        grid-template-columns: 1fr;
+    }
+}
