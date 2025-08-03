@@ -1,3 +1,12 @@
+// Prevent scrolling above or below the page
+window.addEventListener('scroll', () => {
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  if (window.scrollY < 0) {
+    window.scrollTo(0, 0);
+  } else if (window.scrollY > maxScroll) {
+    window.scrollTo(0, maxScroll);
+  }
+});
 // Smooth scroll for nav links
 const navLinks = document.querySelectorAll('nav a');
 navLinks.forEach(link => {
@@ -24,16 +33,38 @@ document.querySelectorAll('section').forEach(section => {
   observer.observe(section);
 });
 
-// Custom cursor
-const cursor = document.createElement('div');
-cursor.id = 'custom-cursor';
-document.body.appendChild(cursor);
-document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
+
+
+
+// Theme switcher with auto-detect
+const themes = ['','theme-dark','theme-paper'];
+const themeIcons = ['🌗','🌑','📄'];
+let themeIndex = 0;
+const themeBtn = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+// Auto-detect system theme
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.body.className = 'theme-dark';
+  themeIndex = 1;
+  if (themeIcon) themeIcon.textContent = themeIcons[1];
+}
+if (themeBtn) {
+  themeBtn.addEventListener('click', () => {
+    themeIndex = (themeIndex+1)%themes.length;
+    document.body.className = themes[themeIndex];
+    themeIcon.textContent = themeIcons[themeIndex];
+  });
+}
+
+
+
+// Parallax effect for SVG lines (snappier)
+const bgLines = document.getElementById('bg-lines');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY || window.pageYOffset;
+  if (bgLines) {
+    bgLines.style.transform = `translateY(${y * 0.18}px)`;
+  }
 });
-// Cursor grow on link hover
-[...document.querySelectorAll('a, button')].forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
-});
+
+
