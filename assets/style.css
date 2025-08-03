@@ -1,13 +1,13 @@
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background: #fff;
-    color: #111;
+    background: #181818;
+    color: #f5f5f5;
     transition: background 0.3s, color 0.3s;
 }
 header {
-    background: #fff;
-    border-bottom: 1px solid #eee;
+    background: transparent;
+    border-bottom: none;
     position: relative;
 }
 nav {
@@ -21,7 +21,7 @@ nav {
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 2px;
-    color: #111;
+    color: #f5f5f5;
 }
 nav ul {
     list-style: none;
@@ -30,7 +30,7 @@ nav ul {
     margin: 0;
 }
 nav a {
-    color: #111;
+    color: #f5f5f5;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s;
@@ -41,14 +41,14 @@ nav a::after {
     display: block;
     width: 0;
     height: 2px;
-    background: #111;
+    background: #f5f5f5;
     transition: width 0.2s;
     position: absolute;
     left: 0;
     bottom: -4px;
 }
 nav a:hover {
-    color: #000;
+    color: #fff;
 }
 nav a:hover::after {
     width: 100%;
@@ -56,43 +56,41 @@ nav a:hover::after {
 .hero {
     text-align: center;
     padding: 6rem 2rem 4rem 2rem;
-    background: #fff;
+    background: transparent;
 }
 .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
     font-family: 'Montserrat', sans-serif;
-    color: #111;
+    color: #f5f5f5;
 }
 .hero p {
     font-size: 1.5rem;
     margin-bottom: 2rem;
-    color: #444;
+    color: #cccccc;
 }
 .cta {
-    background: #111;
-    color: #fff;
+    background: #f5f5f5;
+    color: #181818;
     padding: 0.75rem 2rem;
     border-radius: 0;
     font-weight: bold;
     text-decoration: none;
     box-shadow: none;
-    border: 2px solid #111;
+    border: 2px solid #f5f5f5;
     transition: background 0.2s, color 0.2s;
 }
 .cta:hover {
-    background: #fff;
-    color: #111;
+    background: #181818;
+    color: #f5f5f5;
 }
 main {
     max-width: 900px;
     margin: 0 auto;
     padding: 2rem;
-    background: #fff;
-    border-radius: 0;
-    box-shadow: none;
-    margin-top: -3rem;
-    border: 1px solid #eee;
+    background: transparent;
+    border: none;
+    color: #f5f5f5;
 }
 section {
     margin-bottom: 3rem;
@@ -101,8 +99,8 @@ section h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
     font-family: 'Montserrat', sans-serif;
-    color: #111;
-    border-bottom: 1px solid #eee;
+    color: #f5f5f5;
+    border-bottom: 1px solid #333;
     padding-bottom: 0.5rem;
 }
 .skills-list {
@@ -111,8 +109,8 @@ section h2 {
     gap: 1rem;
 }
 .skill {
-    background: #111;
-    color: #fff;
+    background: #222;
+    color: #f5f5f5;
     padding: 0.5rem 1.5rem;
     border-radius: 0;
     font-weight: 500;
@@ -126,19 +124,19 @@ section h2 {
     gap: 2rem;
 }
 .project {
-    background: #fff;
-    color: #111;
+    background: #222;
+    color: #f5f5f5;
     padding: 1.5rem;
     border-radius: 0;
     box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-    border: 1px solid #eee;
+    border: 1px solid #333;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 .project:hover {
     transform: translateY(-8px) scale(1.03);
     box-shadow: 0 8px 24px rgba(0,0,0,0.10);
-    background: #111;
-    color: #fff;
+    background: #f5f5f5;
+    color: #181818;
 }
 #contact-form {
     display: flex;
@@ -149,37 +147,37 @@ section h2 {
 #contact-form input, #contact-form textarea {
     padding: 0.75rem;
     border-radius: 0;
-    border: 1px solid #eee;
+    border: 1px solid #333;
     font-size: 1rem;
-    background: #fff;
-    color: #111;
+    background: #222;
+    color: #f5f5f5;
 }
 #contact-form button {
-    background: #111;
-    color: #fff;
+    background: #f5f5f5;
+    color: #181818;
     padding: 0.75rem 2rem;
     border-radius: 0;
     font-weight: bold;
-    border: 2px solid #111;
+    border: 2px solid #f5f5f5;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
 }
 #contact-form button:hover {
-    background: #fff;
-    color: #111;
+    background: #181818;
+    color: #f5f5f5;
 }
 #form-message {
     margin-top: 1rem;
     font-weight: 500;
-    color: #111;
+    color: #f5f5f5;
 }
 footer {
     text-align: center;
     padding: 2rem 0 1rem 0;
     font-size: 1rem;
-    color: #111;
-    background: none;
-    border-top: 1px solid #eee;
+    color: #f5f5f5;
+    background: transparent;
+    border-top: 1px solid #333;
 }
 @media (max-width: 700px) {
     nav {
@@ -196,4 +194,55 @@ footer {
     .projects-list {
         grid-template-columns: 1fr;
     }
+}
+/* Unique Feature: Interactive Floating Dots Canvas */
+#dots-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.25;
+}
+/* Diagonal Animated Gradient Background */
+#section-wave {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    background: none;
+    transition: opacity 0.8s;
+    /* Wave effect */
+    clip-path: path('M 100vw 0 Q 50vw 50vh 0 100vh L 0 0 Z');
+}
+.section-wave-light {
+    background: #e0e0e0;
+    transition: opacity 0.8s, background 0.8s;
+}
+.section-wave-dark {
+    background: #181818;
+    transition: opacity 0.8s, background 0.8s;
+}
+#section-wave-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: -2;
+    background: #181818;
+    transition: background 0.8s;
+}
+#section-wave-svg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.8s;
+}
+header, main, footer {
+    position: relative;
+    z-index: 1;
 }
