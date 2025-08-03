@@ -207,50 +207,18 @@ if (form) {
   });
 }
 
-// Scroll-to-top button
-const scrollTopBtn = document.getElementById('scroll-top');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) scrollTopBtn.style.display = 'block';
-  else scrollTopBtn.style.display = 'none';
-});
-scrollTopBtn.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// Section reveal on scroll
-const reveals = document.querySelectorAll('.reveal');
-function revealSections() {
-  const trigger = window.innerHeight * 0.85;
-  reveals.forEach(sec => {
-    const top = sec.getBoundingClientRect().top;
-    if (top < trigger) sec.classList.add('visible');
-    else sec.classList.remove('visible');
-  });
-}
-window.addEventListener('scroll', revealSections);
-window.addEventListener('DOMContentLoaded', revealSections);
-
-// Easter egg
-const easterEgg = document.getElementById('easter-egg');
-let eggSeq = '', eggCode = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba';
-window.addEventListener('keydown', e => {
-  eggSeq += e.key;
-  if (eggSeq.length > eggCode.length) eggSeq = eggSeq.slice(-eggCode.length);
-  if (eggSeq.toLowerCase() === eggCode) {
-    easterEgg.textContent = '🎉 Konami Code! You found the secret! 🎉';
-    easterEgg.classList.remove('hidden');
-    setTimeout(() => easterEgg.classList.add('hidden'), 7000);
-    eggSeq = '';
-  }
-});
-
 // Live year in footer
 const yearSpan = document.getElementById('year');
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-// Floating Dots (Stars) Canvas
-const dotsCanvas = document.createElement('canvas');
-dotsCanvas.id = 'dots-canvas';
+// Floating Dots (Stars) Canvas (prevent duplicate)
+let dotsCanvas = document.getElementById('dots-canvas');
+if (!dotsCanvas) {
+  dotsCanvas = document.createElement('canvas');
+  dotsCanvas.id = 'dots-canvas';
+  dotsCanvas.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(dotsCanvas);
+}
 dotsCanvas.style.position = 'fixed';
 dotsCanvas.style.top = '0';
 dotsCanvas.style.left = '0';
@@ -259,18 +227,19 @@ dotsCanvas.style.height = '100vh';
 dotsCanvas.style.zIndex = '-1';
 dotsCanvas.style.pointerEvents = 'none';
 dotsCanvas.style.opacity = '0.18';
-document.body.appendChild(dotsCanvas);
-const ctx = dotsCanvas.getContext('2d');
+
 let width = window.innerWidth;
 let height = window.innerHeight;
-dotsCanvas.width = width;
-dotsCanvas.height = height;
-window.addEventListener('resize', () => {
+function setCanvasSize() {
   width = window.innerWidth;
   height = window.innerHeight;
   dotsCanvas.width = width;
   dotsCanvas.height = height;
-});
+}
+setCanvasSize();
+window.addEventListener('resize', setCanvasSize);
+
+const ctx = dotsCanvas.getContext('2d');
 const DOTS = 70;
 const dots = Array.from({length: DOTS}, () => ({
   x: Math.random() * width,
@@ -322,3 +291,82 @@ function animateDots() {
   requestAnimationFrame(animateDots);
 }
 animateDots();
+
+// Scroll-to-top button (robust)
+const scrollTopBtn = document.getElementById('scroll-top');
+function handleScrollTopBtn() {
+  if (!scrollTopBtn) return;
+  if (window.scrollY > 300) scrollTopBtn.style.display = 'block';
+  else scrollTopBtn.style.display = 'none';
+}
+window.addEventListener('scroll', handleScrollTopBtn);
+window.addEventListener('DOMContentLoaded', handleScrollTopBtn);
+if (scrollTopBtn) {
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollTopBtn.blur();
+  });
+}
+
+// Section reveal on scroll (polished: add animation delay)
+const reveals = document.querySelectorAll('.reveal');
+function revealSections() {
+  const trigger = window.innerHeight * 0.85;
+  let delay = 0;
+  reveals.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if (top < trigger) {
+      sec.classList.add('visible');
+      sec.style.transitionDelay = delay + 'ms';
+      delay += 120;
+    } else {
+      sec.classList.remove('visible');
+      sec.style.transitionDelay = '0ms';
+    }
+  });
+}
+window.addEventListener('scroll', revealSections);
+window.addEventListener('DOMContentLoaded', revealSections);
+
+// Focus visible for accessibility
+window.addEventListener('keydown', e => {
+  if (e.key === 'Tab') document.body.classList.add('user-is-tabbing');
+});
+window.addEventListener('mousedown', () => {
+  document.body.classList.remove('user-is-tabbing');
+});
+
+// Add aria-live to form message for better feedback
+if (formMessage) {
+  formMessage.setAttribute('aria-live', 'polite');
+}
+
+// Add focus to first error in contact form (if any)
+if (form) {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    formMessage.textContent = 'Thank you for reaching out! I will get back to you soon.';
+    form.reset();
+
+    // Add focus to first error if present
+    const firstError = form.querySelector('.input-error:not(:empty)');
+    if (firstError) {
+      const input = form.querySelector(`#${firstError.id.replace('-error','')}`);
+      if (input) input.focus();
+    }
+  });
+}
+
+// Easter egg
+const easterEgg = document.getElementById('easter-egg');
+let eggSeq = '', eggCode = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba';
+window.addEventListener('keydown', e => {
+  eggSeq += e.key;
+  if (eggSeq.length > eggCode.length) eggSeq = eggSeq.slice(-eggCode.length);
+  if (eggSeq.toLowerCase() === eggCode) {
+    easterEgg.textContent = '🎉 Konami Code! You found the secret! 🎉';
+    easterEgg.classList.remove('hidden');
+    setTimeout(() => easterEgg.classList.add('hidden'), 7000);
+    eggSeq = '';
+  }
+});
