@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 Not Found — Samuel Wu</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .notfound-container {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .notfound-title {
+      font-size: 5rem;
+      font-family: var(--font-header, serif);
+      margin-bottom: 1rem;
+    }
+    .notfound-desc {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .notfound-link {
+      font-size: 1.1rem;
+      color: var(--color-accent);
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    .notfound-link:hover {
+      color: #0070f3;
+    }
+  </style>
+</head>
+<body>
+  <div class="notfound-container">
+    <div class="notfound-title">404</div>
+    <div class="notfound-desc">Sorry, the page you are looking for does not exist.</div>
+    <a class="notfound-link" href="index.html">Go back to Home</a>
+  </div>
+</body>
+</html>

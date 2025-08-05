@@ -28,13 +28,7 @@ body.theme-dark {
     --color-border: #333;
     --color-card: #181818;
 }
-body.theme-paper {
-    --color-bg: #f8f6f2;
-    --color-text: #222;
-    --color-accent: #222;
-    --color-border: #e0ddd7;
-    --color-card: #f3f1ec;
-}
+
 
 #theme-toggle {
     background: none;
@@ -47,7 +41,8 @@ body.theme-paper {
     outline: none;
 }
 #theme-toggle:focus {
-    outline: 2px solid var(--color-accent);
+    outline: none;
+    box-shadow: none;
 }
 
 
@@ -170,31 +165,49 @@ main h2 {
     padding-left: 1rem;
 }
 
-.projects-grid {
+
+/* Projects and Products grid */
+.projects-grid, .products-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2rem;
     margin-top: 2rem;
 }
 
-.project-card {
-    background: #fafafa;
+.project-card, .product-card {
+    background: var(--color-card);
     border: 1px solid var(--color-border);
+    color: var(--color-text);
     padding: 2rem 1.5rem;
     border-radius: 1rem;
-    transition: box-shadow 0.2s, transform 0.2s;
+    transition: box-shadow 0.2s, transform 0.2s, color 0.2s, background 0.2s;
     box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    min-height: 120px;
+    cursor: default;
+    position: relative;
 }
 
-.project-card:hover {
+.project-card:hover, .product-card:hover {
     box-shadow: 0 8px 24px rgba(0,0,0,0.08);
     transform: translateY(-4px) scale(1.03);
 }
 
-.project-card h3 {
+.project-card h3, .product-card h3 {
     font-family: var(--font-header);
     font-size: 1.3rem;
     margin-top: 0;
+}
+
+.product-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--color-accent);
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.product-link:hover {
+    color: #0070f3;
 }
 
 .contact-form {
@@ -243,7 +256,7 @@ footer {
 }
 
 @media (max-width: 900px) {
-    .projects-grid {
+    .projects-grid, .products-grid {
         grid-template-columns: 1fr 1fr;
     }
 }
@@ -251,7 +264,7 @@ footer {
     .container {
         padding: 2rem 1rem;
     }
-    .projects-grid {
+    .projects-grid, .products-grid {
         grid-template-columns: 1fr;
     }
     header .container {
