@@ -11,12 +11,7 @@
 </head>
 <body>
     <!-- Minimalist animated SVG background -->
-    <svg id="bg-lines" width="100%" height="100%" style="position:fixed;top:0;left:0;z-index:0;pointer-events:none;" aria-hidden="true">
-      <line x1="5%" y1="10%" x2="95%" y2="20%" stroke="#e5e5e5" stroke-width="1.5"/>
-      <line x1="10%" y1="80%" x2="90%" y2="70%" stroke="#e5e5e5" stroke-width="1.5"/>
-      <line x1="20%" y1="40%" x2="80%" y2="60%" stroke="#e5e5e5" stroke-width="1.5"/>
-      <line x1="30%" y1="15%" x2="70%" y2="85%" stroke="#e5e5e5" stroke-width="1.5"/>
-    </svg>
+    <svg id="bg-lines" width="100%" height="100%" style="position:fixed;top:0;left:0;z-index:0;pointer-events:none;" aria-hidden="true"></svg>
     <header>
         <div class="container">
             <h1>Samuel Wu</h1>
@@ -64,22 +59,5 @@
         </div>
     </footer>
     <script src="assets/main.js"></script>
-    <script>
-    // Animate SVG lines for subtle movement
-    const lines = document.querySelectorAll('#bg-lines line');
-    lines.forEach((line, i) => {
-      const origX1 = parseFloat(line.getAttribute('x1'));
-      const origY1 = parseFloat(line.getAttribute('y1'));
-      const origX2 = parseFloat(line.getAttribute('x2'));
-      const origY2 = parseFloat(line.getAttribute('y2'));
-      function animateLine(ts) {
-        const t = Date.now()/1200 + i*0.7;
-        line.setAttribute('y1', origY1 + Math.sin(t)*2 + '%');
-        line.setAttribute('y2', origY2 + Math.cos(t)*2 + '%');
-        requestAnimationFrame(animateLine);
-      }
-      animateLine();
-    });
-    </script>
 </body>
 </html>
