@@ -9,9 +9,9 @@ window.addEventListener('DOMContentLoaded', () => {
       // Center point inside 0-100% for both x and y
       const cx = (Math.random() * 100).toFixed(1);
       const cy = (Math.random() * 100).toFixed(1);
-      // Random angle and length
+      // Random angle and even longer length
       const angle = Math.random() * Math.PI * 2;
-      const len = 60 + Math.random() * 80;
+      const len = 220 + Math.random() * 180; // Much longer lines
       // Endpoints calculated from center
       const x1 = (parseFloat(cx) + Math.cos(angle) * len/2).toFixed(1) + '%';
       const y1 = (parseFloat(cy) + Math.sin(angle) * len/2).toFixed(1) + '%';
@@ -43,8 +43,12 @@ window.addEventListener('DOMContentLoaded', () => {
       const origY2 = parseFloat(line.getAttribute('y2'));
       function animateLine() {
         const t = Date.now()/1200 + i*0.7;
-        // Scroll impact: accumulate momentum, decay over time
-        scrollMomentum += (scrollVelocity * 0.18 - scrollMomentum) * 0.08;
+        // Scroll impact: accumulate momentum, decay over time (less twitchy)
+        // Clamp and round scrollVelocity to avoid jitter
+        let velocity = Math.round(scrollVelocity * 100) / 100;
+        if (Math.abs(velocity) < 0.2) velocity = 0;
+        scrollMomentum += (velocity * 0.10 - scrollMomentum) * 0.03;
+        scrollMomentum = Math.round(scrollMomentum * 1000) / 1000;
         // Calculate offset from center for each endpoint
         const dx1 = origX1 - 50;
         const dy1 = origY1 - 50;
@@ -140,72 +144,7 @@ window.addEventListener('scroll', () => {
     window.scrollTo(0, maxScroll);
   }
 });
-// Seamless transitions for nav links (SPA-like)
-const navLinks = document.querySelectorAll('nav a');
-navLinks.forEach(link => {
-  link.addEventListener('click', function(e) {
-    const href = this.getAttribute('href');
-    // Only apply seamless transition for internal pages (not hash, mailto, or external)
-    if (
-      !href.startsWith('#') &&
-      !href.startsWith('mailto:') &&
-      !href.startsWith('javascript:') &&
-      !href.startsWith('http') &&
-      !href.startsWith('//')
-    ) {
-      e.preventDefault();
-      flyOutLines();
-      setTimeout(() => {
-        fetch(href)
-          .then(res => res.text())
-          .then(html => {
-            // Extract the <body> content from the new page
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const newBody = doc.body;
-            // Replace current <body> content except for persistent elements (SVG background, nav)
-            const keepIds = ['bg-lines', 'theme-toggle', 'theme-icon', 'nav'];
-            Array.from(document.body.children).forEach(child => {
-              if (!keepIds.some(id => child.id === id || child.tagName.toLowerCase() === id)) {
-                child.remove();
-              }
-            });
-            Array.from(newBody.children).forEach(child => {
-              if (!keepIds.some(id => child.id === id || child.tagName.toLowerCase() === id)) {
-                document.body.appendChild(child);
-              }
-            });
-            // Update document title
-            document.title = doc.title;
-            // Re-run fade-in, section observer, etc.
-            if (window.initPageFeatures) window.initPageFeatures();
-            // Animate lines back in
-            flyInLines();
-          });
-      }, 650);
-    } else if (href.startsWith('#')) {
-      e.preventDefault();
-      document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-});
-
-// Re-init page features after seamless transition
-window.initPageFeatures = function() {
-  // Fade-in on scroll for sections
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('fade-in');
-      }
-    });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('section').forEach(section => {
-    section.classList.add('fade-init');
-    observer.observe(section);
-  });
-};
-window.initPageFeatures();
+// ...navigation click handler removed for native browser navigation and smooth scroll...
 
 // Fade-in on scroll for sections
 const observer = new IntersectionObserver((entries) => {
@@ -273,20 +212,19 @@ if (themeBtn) {
 
 
 
-// Parallax effect for SVG lines with scroll momentum
+// Smooth momentum effect for SVG lines on scroll
 const bgLines = document.getElementById('bg-lines');
 let targetScrollY = window.scrollY || window.pageYOffset;
 let currentScrollY = targetScrollY;
-function animateParallax() {
-  // Smoothly approach the target scroll position (momentum effect)
-  currentScrollY += (targetScrollY - currentScrollY) * 0.12;
+function animateBgLines() {
+  targetScrollY = window.scrollY || window.pageYOffset;
+  // Approach the target scroll position with less bounce (lower factor)
+  currentScrollY += (targetScrollY - currentScrollY) * 0.07;
   if (bgLines) {
+    bgLines.style.transition = 'none';
     bgLines.style.transform = `translateY(${currentScrollY * 0.18}px)`;
   }
-  requestAnimationFrame(animateParallax);
+  requestAnimationFrame(animateBgLines);
 }
-animateParallax();
-window.addEventListener('scroll', () => {
-  targetScrollY = window.scrollY || window.pageYOffset;
-});
+animateBgLines();
 

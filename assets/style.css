@@ -1,5 +1,15 @@
+/* Hide scroll bar for all browsers */
+html, body {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+    display: none; /* Chrome/Safari/Webkit */
+}
+
 html, body {
     overscroll-behavior: none;
+    scroll-behavior: smooth;
 }
 
 

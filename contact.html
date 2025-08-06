@@ -8,14 +8,53 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/style.css">
+    <style>
+      .contact-icons {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2rem;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+      .icon-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 1.5px solid var(--color-border);
+        background: var(--color-card);
+        color: var(--color-accent);
+        font-size: 2rem;
+        transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+        cursor: pointer;
+        outline: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        margin-bottom: 0.5rem;
+      }
+      .icon-btn:hover {
+        border: 1.5px solid #0070f3;
+        background: #f0f8ff;
+        color: #0070f3;
+        box-shadow: 0 8px 24px rgba(0,112,243,0.08);
+      }
+      .icon-btn svg {
+        width: 28px;
+        height: 28px;
+        display: block;
+      }
+      .icon-label {
+        display: block;
+        font-size: 1rem;
+        margin-top: 0.3rem;
+        color: var(--color-text);
+        text-align: center;
+      }
+    </style>
 </head>
 <body>
-    <svg id="bg-lines" width="100%" height="100%" style="position:fixed;top:0;left:0;z-index:0;pointer-events:none;" aria-hidden="true">
-      <line x1="5%" y1="10%" x2="95%" y2="20%" stroke="#e5e5e5" stroke-width="1.5"/>
-      <line x1="10%" y1="80%" x2="90%" y2="70%" stroke="#e5e5e5" stroke-width="1.5"/>
-      <line x1="20%" y1="40%" x2="80%" y2="60%" stroke="#e5e5e5" stroke-width="1.5"/>
-      <line x1="30%" y1="15%" x2="70%" y2="85%" stroke="#e5e5e5" stroke-width="1.5"/>
-    </svg>
+    <svg id="bg-lines" width="100%" height="100%" style="position:fixed;top:0;left:0;z-index:0;pointer-events:none;opacity:0;transition:opacity 0.8s;" aria-hidden="true"></svg>
     <header>
         <div class="container">
             <h1>Samuel Wu</h1>
@@ -33,14 +72,20 @@
     <main style="position:relative;z-index:1;">
         <section class="container">
             <h2>Contact</h2>
-            <div style="font-size:1.2rem;line-height:2;">
-                <p>Feel free to reach out via any of the platforms below:</p>
-                <ul style="list-style:none;padding:0;">
-                  <li><button type="button" class="product-link" style="background:none;border:1px solid var(--color-border);padding:0.6em 1.2em;border-radius:0.5em;cursor:pointer;margin-bottom:0.7em;">Instagram (placeholder)</button></li>
-                  <li><button type="button" class="product-link" style="background:none;border:1px solid var(--color-border);padding:0.6em 1.2em;border-radius:0.5em;cursor:pointer;margin-bottom:0.7em;">Discord (placeholder)</button></li>
-                  <li><button type="button" class="product-link" style="background:none;border:1px solid var(--color-border);padding:0.6em 1.2em;border-radius:0.5em;cursor:pointer;margin-bottom:0.7em;">Email (placeholder)</button></li>
-                  <!-- Add more buttons as needed -->
-                </ul>
+            <p style="font-size:1.2rem;line-height:2;">Connect with me on your favorite platform:</p>
+            <div class="contact-icons">
+                <a class="icon-btn" href="https://instagram.com/yourusername" target="_blank" rel="noopener" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <span class="icon-label">Instagram</span>
+                <a class="icon-btn" href="https://discord.com/users/yourdiscordid" target="_blank" rel="noopener" aria-label="Discord">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.472 17.462c-1.563 1.563-6.381 1.563-7.944 0C4.5 15.434 2 12.5 2 12.5s2.5-2.934 7.528-4.962c1.563-1.563 6.381-1.563 7.944 0C19.5 9.566 22 12.5 22 12.5s-2.5 2.934-7.528 4.962z"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/></svg>
+                </a>
+                <span class="icon-label">Discord</span>
+                <a class="icon-btn" href="mailto:your@email.com" aria-label="Email">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
+                </a>
+                <span class="icon-label">Email</span>
             </div>
         </section>
     </main>
@@ -50,5 +95,4 @@
         </div>
     </footer>
     <script src="assets/main.js"></script>
-</body>
-</html>
+
